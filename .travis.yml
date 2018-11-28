@@ -1,0 +1,5 @@
+language: java
+script: ant validate-ci
+branches:
+  only:
+    - master

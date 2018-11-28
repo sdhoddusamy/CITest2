@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <project xmlns:sf="antlib:com.salesforce" default="sf" basedir=".">
+ 
+  <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="lib/ant-contrib-1.0b3.jar" />
+  <taskdef uri="antlib:com.salesforce" resource="com/salesforce/antlib.xml" classpath="lib/ant-salesforce.jar"/>
+
+  <property environment="env" />
+
+  <target name="validate-ci">
+    <property file="properties/ci.build.properties" />
+    <validate />
+  </target>
+
+  <macrodef name="validate">
+    <sequential>
+      <echo>Running validation with username ${sf.username}</echo>
+      <sf:deploy
+        checkOnly="true"
+        deployRoot="${sf.deployRoot}"
+        ignoreWarnings="true"
+        maxPoll="${sf.maxPoll}"
+        password="${sf.password}"
+        pollWaitMillis="${sf.pollWaitMillis}"
+        serverurl="${sf.serverurl}"
+        testLevel="${sf.testLevel}"
+        username="${sf.username}"
+      />
+    </sequential>
+  </macrodef>
+
+</project>
